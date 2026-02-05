@@ -37,6 +37,27 @@
         <span class="@pieces[i]"></span>
     }
 </div>
+<section style="width: 400px">
+    <h3 class="text--size-25 text-center py-3 text--weight-700">Win Counter</h3>
+    <div class="d-flex justify-content-evenly">
+        <div class="text-center">
+            <p class="text--weight-700 text--size-18">Player 1</p>
+            <p>@State.Player1WinCounter</p>
+            @if (State.Player1WinCounter > State.Player2WinCounter)
+            {
+                <p>🔥</p>
+            }
+        </div>
+        <div class="text-center">
+            <p class="text--weight-700 text--size-18">Player 2</p>
+            <p>@State.Player2WinCounter</p>
+            @if (State.Player2WinCounter > State.Player1WinCounter)
+            {
+                <p>🔥</p>
+            }
+        </div>
+    </div>
+</section>
 
 @code {
     private string[] pieces = new string[42];
@@ -49,6 +70,7 @@
     private void PlayPiece(byte col)
     {
         errorMessage = string.Empty;
+        var winState = State.CheckForWin();
         try
         {
             var player = State.PlayerTurn;
@@ -60,13 +82,17 @@
         {
             errorMessage = ex.Message;
         }
-        winnerMessage = State.CheckForWin() switch
+        winnerMessage = winState switch
         {
             GameState.WinState.Player1_Wins => "Player 1 Wins!",
             GameState.WinState.Player2_Wins => "Player 2 Wins!",
             GameState.WinState.Tie => "It's a tie!",
             _ => ""
         };
+        if (winState != GameState.WinState.No_Winner)
+        {
+            State.RegisterWin(winState);
+        }
     }
 
     [Parameter]

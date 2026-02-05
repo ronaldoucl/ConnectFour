@@ -141,6 +141,38 @@ span.container {
     animation-name: drop6
 }
 
+.text--size-14 {
+    font-size: 14px;
+}
+
+.text--size-15 {
+    font-size: 15px !important;
+}
+
+.text--size-16 {
+    font-size: 16px;
+}
+
+.text--size-17 {
+    font-size: 17px;
+}
+
+.text--size-18 {
+    font-size: 18px;
+}
+
+.text--size-20 {
+    font-size: 20px;
+}
+
+.text--size-25 {
+    font-size: 25px;
+}
+
+.text--weight-700 {
+    font-weight: 700;
+}
+
 @keyframes drop1 {
     100%,75%,90%,97% {
         transform: translateY(1.27em)

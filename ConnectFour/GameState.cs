@@ -30,6 +30,8 @@ public class GameState
     public int CurrentTurn { get { return TheBoard.Count(x => x != 0); } }
 
     public static readonly List<int[]> WinningPlaces = new();
+    public int Player1WinCounter { get; private set; } = 0;
+    public int Player2WinCounter { get; private set; } = 0;
 
     public static void CalculateWinningPlaces()
     {
@@ -191,4 +193,17 @@ public class GameState
 
     }
 
+    public void RegisterWin(WinState winState)
+    {
+        switch (winState)
+        {
+            case WinState.Player1_Wins:
+                Player1WinCounter++;
+                break;
+
+            case WinState.Player2_Wins:
+                Player2WinCounter++;
+                break;
+        }
+    }
 }
